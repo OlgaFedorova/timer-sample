@@ -8,9 +8,6 @@ subprojects{
 
     repositories {
         mavenCentral()
-        maven {
-            url = "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/groups/PARUS_group/"
-        }
     }
 }
 
