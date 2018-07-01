@@ -1,0 +1,16 @@
+group 'ofedorova'
+
+subprojects{
+
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.7
+
+    repositories {
+        mavenCentral()
+        maven {
+            url = "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/groups/PARUS_group/"
+        }
+    }
+}
+

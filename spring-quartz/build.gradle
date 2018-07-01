@@ -1,0 +1,11 @@
+group 'ofedorova'
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-core', version: '5.0.1.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.1.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '5.0.1.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '5.0.1.RELEASE'
+    compile group: 'org.springframework', name: 'spring-support', version: '2.0.8'
+
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+}

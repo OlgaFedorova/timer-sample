@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="someJob"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="ofedorova.MyJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="jobState" value-ref="jobDataBean" />
+			</map>
+		</property>
+	</bean>
+
+	<bean name="jobDataBean" class="ofedorova.MyJobHelper">
+		<constructor-arg index="0">
+			<value>Spring Quartz Example</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="someJob" />
+		<property name="cronExpression" value="0/2 * * * * ?" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger" />
+			</list>
+		</property>
+
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="txManager" />
+		<property name="configLocation" value="quartz.properties" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<property name="autoStartup" value="true" />
+	</bean>
+
+	<bean id="dataSource"
+		  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost/timers" />
+		<property name="username" value="postgres" />
+		<property name="password" value="123" />
+	</bean>
+
+	<bean id='txManager' class='org.springframework.jdbc.datasource.DataSourceTransactionManager'>
+		<property name='dataSource' ref='dataSource'/>
+	</bean>
+
+</beans>
